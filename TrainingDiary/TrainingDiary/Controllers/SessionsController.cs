@@ -25,7 +25,7 @@ namespace TrainingDiary.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
-            return await _context.Session.ToListAsync();
+            return await _context.Session.Include(t => t.Excercises).ToListAsync();
         }
 
         // GET: api/Sessions/5

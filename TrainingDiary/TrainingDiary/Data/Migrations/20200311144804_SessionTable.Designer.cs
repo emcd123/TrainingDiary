@@ -10,8 +10,8 @@ using TrainingDiary.Data;
 namespace TrainingDiary.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200311100616_AddedSessionTable")]
-    partial class AddedSessionTable
+    [Migration("20200311144804_SessionTable")]
+    partial class SessionTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -305,6 +305,7 @@ namespace TrainingDiary.Data.Migrations
 
             modelBuilder.Entity("TrainingDiary.Models.Excercise", b =>
                 {
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrainingDiary.Data.Migrations
 {
-    public partial class AddedSessionTable : Migration
+    public partial class SessionTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

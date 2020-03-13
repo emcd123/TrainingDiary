@@ -95,6 +95,8 @@ namespace TrainingDiary.Controllers
         [HttpPost]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
+            //session.UserId = user.Id;
             _context.Session.Add(session);
             await _context.SaveChangesAsync();
 

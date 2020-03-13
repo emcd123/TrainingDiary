@@ -27,5 +27,7 @@ namespace TrainingDiary.Models
                 _excercises = value;
             }
         }
+
+        public string UserId { get; set; }
     }
 }

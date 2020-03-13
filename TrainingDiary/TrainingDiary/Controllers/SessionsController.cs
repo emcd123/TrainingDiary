@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrainingDiary.Data;
@@ -15,16 +17,20 @@ namespace TrainingDiary.Controllers
     public class SessionsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        //private readonly UserManager<IdentityUser> _userManager;
 
-        public SessionsController(ApplicationDbContext context)
+        public SessionsController(ApplicationDbContext context/*, UserManager<IdentityUser> userManager*/)
         {
             _context = context;
+            //_userManager = userManager;
         }
 
         // GET: api/Sessions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
+            //return await _context.Session.Include(t => t.Excercises).Where(e => e.UserId == user.Id).ToListAsync();
             return await _context.Session.Include(t => t.Excercises).ToListAsync();
         }
 
@@ -32,14 +38,16 @@ namespace TrainingDiary.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Session>> GetSession(int id)
         {
-            var session = await _context.Session.FindAsync(id);
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
+            //var sessions _context.Session.Include(t => t.Excercises).Where(e => e.UserId == user.Id).ToListAsync();
+            var sessions = await _context.Session.Include(t => t.Excercises).ToListAsync();
 
-            if (session == null)
+            if (sessions == null)
             {
                 return NotFound();
             }
 
-            return session;
+            return sessions.Where(e => e.Id == id).FirstOrDefault();
         }
 
         // PUT: api/Sessions/5

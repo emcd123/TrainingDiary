@@ -55,6 +55,13 @@ namespace TrainingDiary.Controllers
 
             _context.Entry(session).State = EntityState.Modified;
 
+            foreach (var excercise in session.Excercises)
+            {
+                _context.Entry(excercise).State = EntityState.Modified;
+            }
+
+            _context.SaveChanges();
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -94,7 +101,7 @@ namespace TrainingDiary.Controllers
             if (session == null)
             {
                 return NotFound();
-            }
+            } 
 
             _context.Session.Remove(session);
             await _context.SaveChangesAsync();

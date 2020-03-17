@@ -19,5 +19,7 @@ namespace TrainingDiary.Data
         }
 
         public DbSet<TrainingDiary.Models.Session> Session { get; set; }
+
+        public DbSet<TrainingDiary.Models.Tag> Tag { get; set; }
     }
 }

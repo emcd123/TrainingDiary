@@ -28,6 +28,19 @@ namespace TrainingDiary.Models
             }
         }
 
+        protected List<ActiveTag> _activeTags;
+        public List<ActiveTag> ActiveTags
+        {
+            get
+            {
+                return _activeTags;
+            }
+            set
+            {
+                _activeTags = value;
+            }
+        }
+
         public string UserId { get; set; }
     }
 }

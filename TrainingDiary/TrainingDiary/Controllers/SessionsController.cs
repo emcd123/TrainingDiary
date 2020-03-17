@@ -31,7 +31,7 @@ namespace TrainingDiary.Controllers
         {
             //var user = await _userManager.GetUserAsync(HttpContext.User);
             //return await _context.Session.Include(t => t.Excercises).Where(e => e.UserId == user.Id).ToListAsync();
-            return await _context.Session.Include(t => t.Excercises).ToListAsync();
+            return await _context.Session.Include(t => t.Excercises).Include(t => t.ActiveTags).ToListAsync();
         }
 
         // GET: api/Sessions/5
@@ -40,7 +40,7 @@ namespace TrainingDiary.Controllers
         {
             //var user = await _userManager.GetUserAsync(HttpContext.User);
             //var sessions _context.Session.Include(t => t.Excercises).Where(e => e.UserId == user.Id).ToListAsync();
-            var sessions = await _context.Session.Include(t => t.Excercises).ToListAsync();
+            var sessions = await _context.Session.Include(t => t.Excercises).Include(t => t.ActiveTags).ToListAsync();
 
             if (sessions == null)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using TrainingDiary.Models;
 
 namespace TrainingDiary.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SessionsController : ControllerBase
@@ -31,6 +33,7 @@ namespace TrainingDiary.Controllers
         {
             //var user = await _userManager.GetUserAsync(HttpContext.User);
             //return await _context.Session.Include(t => t.Excercises).Where(e => e.UserId == user.Id).ToListAsync();
+            var test = await _context.Session.Include(t => t.Excercises).Include(t => t.ActiveTags).ToListAsync();
             return await _context.Session.Include(t => t.Excercises).Include(t => t.ActiveTags).ToListAsync();
         }
 

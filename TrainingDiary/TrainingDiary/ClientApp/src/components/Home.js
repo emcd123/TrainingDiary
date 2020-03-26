@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService'
 import './home.css';
 
-class Detail extends React.Component {
+class ExcerciseEntry extends React.Component {
     render() {
         return (
-            <div class="container mt-5">
-                <div class="starter-template">
-                    <SessionCard Title="Week 1 Day 1" Details="This is the session body" />
-                    <SessionCard Title="Week 1 Day 2" Details="This is the session body" />
-                    <SessionCard Title="Week 1 Day 3" Details="This is the session body" />
-                </div>
+            <div>
+                <p>{this.props.excercise.name}, {this.props.excercise.sets}, {this.props.excercise.reps}, {this.props.excercise.weightLifted}</p>
             </div>
         );
     }
@@ -23,13 +19,13 @@ class SessionCard extends React.Component {
                 <div >
                     <div class="card mb-4">
                         <div class="card-header">
-                            {this.props.Title}
+                            {this.props.SessionDate}
                         </div>
 
                         <div class="card-body">
                             <div>
                                 {this.props.ExcerciseEntries.map(detail => (
-                                    <p>{detail.name}</p>
+                                    <ExcerciseEntry excercise={detail} />
                                 ))}
                             </div>
                             <div class="text-right">
@@ -60,7 +56,7 @@ export class Home extends Component {
         return (
             <div>
                 {sessions.map(session => (
-                    <SessionCard Title={session.completedDate} ExcerciseEntries={session.excercises} />
+                    <SessionCard SessionDate={session.completedDate} ExcerciseEntries={session.excercises} />
                 ))}
                 <pre>{JSON.stringify(sessions, null, 2)}</pre>
             </div>

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService'
 import './home.css';
+import { Link } from "react-router-dom"; 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
 class ExcerciseEntry extends React.Component {
     render() {
         return (
@@ -80,7 +82,7 @@ export class Home extends Component {
                         <h1 id="tabelLabel" >Sessions List</h1>
                     </div>
                     <div class="col col-lg-2">
-                        <AddSessionModal buttonLabel="Add Session"/>
+                        <Link to="/add-session" className="btn btn-primary btn-lg">Add Session</Link>
                     </div>
                 </div>
                 {contents}

@@ -6,7 +6,7 @@ class ExcerciseEntry extends React.Component {
     render() {
         return (
             <div>
-                <p>{this.props.excercise.name}, {this.props.excercise.sets}, {this.props.excercise.reps}, {this.props.excercise.weightLifted}</p>
+                <p>{this.props.excercise.name.charAt(0).toUpperCase() + this.props.excercise.name.slice(1)} {this.props.excercise.sets}x{this.props.excercise.reps} {this.props.excercise.weightLifted}kg</p>
             </div>
         );
     }
@@ -18,8 +18,12 @@ class SessionCard extends React.Component {
             <div>
                 <div >
                     <div class="card mb-4">
-                        <div class="card-header">
-                            {this.props.SessionDate}
+                        <div class="card-header">                            
+                            {new Intl.DateTimeFormat('en-GB', {
+                                month: 'long',
+                                day: '2-digit',
+                                year: 'numeric',
+                            }).format(new Date(this.props.SessionDate))}
                         </div>
 
                         <div class="card-body">
@@ -70,7 +74,14 @@ export class Home extends Component {
 
         return (
             <div>
-                <h1 id="tabelLabel" >Sessions List</h1>
+                <div class="row" style={{marginBottom: 25}}>
+                    <div class="col-md-10">
+                        <h1 id="tabelLabel" >Sessions List</h1>
+                    </div>
+                    <div class="col col-lg-2">
+                        <button class="btn-lg btn-primary">Add Session</button>
+                    </div>
+                </div>
                 {contents}
             </div>
       );

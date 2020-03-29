@@ -100,6 +100,7 @@ namespace TrainingDiary.Controllers
         {
             //var user = await _userManager.GetUserAsync(HttpContext.User);
             //session.UserId = user.Id;
+            session.CompletedDate = DateTime.Now;
             _context.Session.Add(session);
             await _context.SaveChangesAsync();
 

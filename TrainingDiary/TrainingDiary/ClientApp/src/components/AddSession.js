@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import axios from 'axios';
+import authService from './api-authorization/AuthorizeService'
 import { Button, Jumbotron } from 'reactstrap';
 import { AddExcerciseModal } from './modals/AddExcerciseModal';
 import { NewExcerciseForm } from './view-controls/NewExcerciseForm';
@@ -17,7 +18,11 @@ export class AddSession extends Component {
         excercises: []
     }
 
-    handleSessionSubmit(event) {
+    async handleSessionSubmit(event) {
+        const token = await authService.getAccessToken();
+        let axiosConfig = {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        };
         const {
             session
         } = this.state;
@@ -27,10 +32,11 @@ export class AddSession extends Component {
         // do something with form values, and then
         axios.post('api/Sessions', {
             session // + any other parameters you want to send in the POST request
-        }).then(response => {
-            // do something with response, and on response
+        }, axiosConfig).then(response => {
+            console.log(response);
+            console.log(response.data);
         }).catch(error => {
-            // do something when request was unsuccessful
+            console.log(error);
         });
     }
 
@@ -73,7 +79,7 @@ export class AddSession extends Component {
                         </tr>
                     ))}
                 </table>
-                <Button color="success" onclick={e => this.handleSessionSubmit(e)} >Submit</Button>{' '}
+                <Button color="success" onClick={e => this.handleSessionSubmit(e)} >Submit</Button>{' '}
                 <Button color="danger">Clear</Button>{' '}
             </div>
         );

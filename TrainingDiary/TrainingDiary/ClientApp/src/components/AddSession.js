@@ -20,19 +20,14 @@ export class AddSession extends Component {
 
     async handleSessionSubmit(event) {
         const token = await authService.getAccessToken();
+        let excercises = this.state.excercises;
         let axiosConfig = {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         };
-        const {
-            session
-        } = this.state;
-
-        event.preventDefault();
 
         // do something with form values, and then
-        axios.post('api/Sessions', {
-            session // + any other parameters you want to send in the POST request
-        }, axiosConfig).then(response => {
+        axios.post('api/Sessions', { excercises }, axiosConfig)
+        .then(response => {
             console.log(response);
             console.log(response.data);
         }).catch(error => {
@@ -79,7 +74,7 @@ export class AddSession extends Component {
                         </tr>
                     ))}
                 </table>
-                <Button color="success" onClick={e => this.handleSessionSubmit(e)} >Submit</Button>{' '}
+                <Button color="success" onClick={ this.handleSessionSubmit } >Submit</Button>{' '}
                 <Button color="danger">Clear</Button>{' '}
             </div>
         );

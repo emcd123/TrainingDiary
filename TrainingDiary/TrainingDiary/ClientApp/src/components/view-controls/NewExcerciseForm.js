@@ -26,7 +26,12 @@ export class NewExcerciseForm extends React.Component {
 
         var excercise = {};
         formData.forEach(function (value, key) {
-            excercise[key] = value;
+            if (key != 'name') {
+                excercise[key] = parseInt(value, 10)
+            }
+            else {
+                excercise[key] = value;
+            }
         });
         this.props.handleStateChange(excercise);
     }
@@ -41,22 +46,22 @@ export class NewExcerciseForm extends React.Component {
                 </FormGroup>
                 <FormGroup>
                     <Label for="excerciseSets">Sets</Label>
-                    <Input type="text" name="sets" id="excerciseSets"
+                    <Input type="number" name="sets" id="excerciseSets"
                         onChange={e => this.setState({ sets: e.target.value })}/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="excerciseReps">Reps</Label>
-                    <Input type="text" name="reps" id="excerciseReps"
+                    <Input type="number" name="reps" id="excerciseReps"
                         onChange={e => this.setState({ reps: e.target.value })}/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="excerciseRpe">RPE</Label>
-                    <Input type="text" name="rpe" id="excerciseRpe"
+                    <Input type="number" name="rpe" id="excerciseRpe"
                         onChange={e => this.setState({ rpe: e.target.value })}/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="excerciseWeight">Weight</Label>
-                    <Input type="text" name="weight" id="excerciseWeight"
+                    <Input type="number" name="weight" id="excerciseWeight"
                         onChange={e => this.setState({ weightLifted: e.target.value })}/>
                 </FormGroup>
                 <input type="submit" onClick={e => this.handleFormSubmit(e)} value="Add" />

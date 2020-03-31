@@ -3,7 +3,7 @@ import axios from 'axios';
 import authService from './api-authorization/AuthorizeService'
 import { Button, Jumbotron } from 'reactstrap';
 import { AddExcerciseModal } from './modals/AddExcerciseModal';
-import { ConfirmationModal } from './modals/ConfirmationModal';
+import { CancelSubmissionModal } from './modals/CancelSubmissionModal';
 import { NewExcerciseForm } from './view-controls/NewExcerciseForm';
 import { Table } from 'reactstrap';
 
@@ -89,7 +89,7 @@ export class AddSession extends Component {
                 </Table>
                 <div clss="row-12" style={{ display: 'flex' }} >
                     <Button color="success" onClick={this.handleSessionSubmit} >Submit</Button>
-                    <ConfirmationModal buttonLabel="Clear" />
+                    <CancelSubmissionModal buttonLabel="Clear" urlRoute="/" />
                 </div>
             </div>
         );

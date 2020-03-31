@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
-export class ConfirmationModal extends React.Component {
+export class CancelSubmissionModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,7 +29,7 @@ export class ConfirmationModal extends React.Component {
                         Please confirm you are sure, this will permanently delete the unsubmitted data.
                     </ModalBody>
                     <ModalFooter>
-                        <Link to="/" className="btn btn-danger btn-md">Confirm</Link>{' '}
+                        <Link to={this.props.urlRoute} className="btn btn-danger btn-md">Confirm</Link>{' '}
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
@@ -38,4 +38,4 @@ export class ConfirmationModal extends React.Component {
     }
 }
 
-export default ConfirmationModal;
+export default CancelSubmissionModal;

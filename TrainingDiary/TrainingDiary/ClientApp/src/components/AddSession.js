@@ -3,6 +3,7 @@ import axios from 'axios';
 import authService from './api-authorization/AuthorizeService'
 import { Button, Jumbotron } from 'reactstrap';
 import { AddExcerciseModal } from './modals/AddExcerciseModal';
+import { ConfirmationModal } from './modals/ConfirmationModal';
 import { NewExcerciseForm } from './view-controls/NewExcerciseForm';
 import { Table } from 'reactstrap';
 
@@ -72,7 +73,7 @@ export class AddSession extends Component {
                         <th>Reps</th>
                         <th>Rpe</th>
                         <th>Weight Lifted</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
 
                     {this.state.excercises.map((excercise) => (
@@ -86,8 +87,10 @@ export class AddSession extends Component {
                         </tr>
                     ))}
                 </Table>
-                <Button color="success" onClick={ this.handleSessionSubmit } >Submit</Button>{' '}
-                <Button color="danger">Clear</Button>{' '}
+                <div clss="row-12" style={{ display: 'flex' }} >
+                    <Button color="success" onClick={this.handleSessionSubmit} >Submit</Button>
+                    <ConfirmationModal buttonLabel="Clear" />
+                </div>
             </div>
         );
     }

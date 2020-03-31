@@ -64,7 +64,7 @@ export class NewExcerciseForm extends React.Component {
                     <Input type="number" name="weight" id="excerciseWeight"
                         onChange={e => this.setState({ weightLifted: e.target.value })}/>
                 </FormGroup>
-                <input type="submit" onClick={e => this.handleFormSubmit(e)} value="Add" />
+                <Button color="success" size="md" type="submit" onClick={e => this.handleFormSubmit(e)} > Add </Button>
             </Form>
        );
     }

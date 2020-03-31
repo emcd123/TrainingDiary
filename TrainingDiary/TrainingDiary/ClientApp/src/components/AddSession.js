@@ -4,6 +4,7 @@ import authService from './api-authorization/AuthorizeService'
 import { Button, Jumbotron } from 'reactstrap';
 import { AddExcerciseModal } from './modals/AddExcerciseModal';
 import { NewExcerciseForm } from './view-controls/NewExcerciseForm';
+import { Table } from 'reactstrap';
 
 export class AddSession extends Component {
     static displayName = AddSession.name;
@@ -12,6 +13,7 @@ export class AddSession extends Component {
         super();
         this.handleStateChange = this.handleStateChange.bind(this);
         this.handleSessionSubmit = this.handleSessionSubmit.bind(this);
+        this.removeFromTable = this.removeFromTable.bind(this);
     }
 
     state = {
@@ -41,6 +43,14 @@ export class AddSession extends Component {
         this.setState({ excercises: excercises })
     }
 
+    removeFromTable(value) {
+        let excercises = [...this.state.excercises]
+        excercises.splice(value, 1)
+        this.setState({
+            excercises: excercises
+        })
+    }
+
     render() {
         return (
             <div>
@@ -55,13 +65,14 @@ export class AddSession extends Component {
                 <Jumbotron>
                     <NewExcerciseForm handleStateChange={this.handleStateChange} />
                 </Jumbotron>
-                <table border='1' width='100%' >
+                <Table>
                     <tr>
                         <th>Name</th>
                         <th>Sets</th>
                         <th>Reps</th>
                         <th>Rpe</th>
                         <th>Weight Lifted</th>
+                        <th>Actions</th>
                     </tr>
 
                     {this.state.excercises.map((excercise) => (
@@ -71,9 +82,10 @@ export class AddSession extends Component {
                             <td>{excercise.reps}</td>
                             <td>{excercise.rpe}</td>
                             <td>{excercise.weightLifted}</td>
+                            <td><Button color="danger" size="sm" onClick={this.removeFromTable} >Remove</Button></td>
                         </tr>
                     ))}
-                </table>
+                </Table>
                 <Button color="success" onClick={ this.handleSessionSubmit } >Submit</Button>{' '}
                 <Button color="danger">Clear</Button>{' '}
             </div>

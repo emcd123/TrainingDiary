@@ -2,6 +2,14 @@
 import { ExcerciseEntry } from './ExcerciseEntry'
 
 export class SessionCard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    handleDeletion(event) {
+        this.props.removeFromSessionList(this.props.SessionId);
+    }
+
     render() {
         return (
             <div>
@@ -22,7 +30,7 @@ export class SessionCard extends React.Component {
                                 ))}
                             </div>
                             <div class="text-right">
-                                <button class="btn-danger mr-2">Delete</button>
+                                <button class="btn-danger mr-2" onClick={e => this.handleDeletion(e)}>Delete</button>
                                 <button class="btn-primary">Edit</button>
                             </div>
                         </div>

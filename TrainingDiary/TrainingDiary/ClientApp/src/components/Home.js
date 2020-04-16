@@ -11,6 +11,8 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
+        this.renderSessionsList = this.renderSessionsList.bind(this);
+        this.removeFromSessionList = this.removeFromSessionList.bind(this);
         this.state = { sessions: [], loading: true };
     }
 
@@ -18,21 +20,54 @@ export class Home extends Component {
         this.populateSessionData();
     }
 
-    static renderSessionsList(sessions) {
+    renderSessionsList() {
+        let sessions = this.state.sessions;
+        sessions.sort(function (a, b) {
+            var key1 = new Date(a.date);
+            var key2 = new Date(b.date);
+
+            if (key1 < key2) {
+                return -1;
+            } else if (key1 == key2) {
+                return 0;
+            } else {
+                return 1;
+            }
+        });
         return (
             <div>
                 {sessions.map(session => (
-                    <SessionCard SessionDate={session.completedDate} ExcerciseEntries={session.excercises} />
+                    <SessionCard SessionId={session.id} SessionDate={session.completedDate} ExcerciseEntries={session.excercises} removeFromSessionList={this.removeFromSessionList}/>
                 ))}
                 <pre>{JSON.stringify(sessions, null, 2)}</pre>
             </div>
         );
     }
-    
+
+    removeFromSessionList(value) {
+        let sessions = this.state.sessions;
+        var sessionList = sessions.filter(obj => obj.id !== value);
+        sessionList.sort(function (a, b) {
+            var key1 = new Date(a.date);
+            var key2 = new Date(b.date);
+
+            if (key1 < key2) {
+                return -1;
+            } else if (key1 == key2) {
+                return 0;
+            } else {
+                return 1;
+            }
+        });
+        this.setState({
+            sessions: sessionList
+        })
+    }
+
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : Home.renderSessionsList(this.state.sessions);
+            : this.renderSessionsList(this.state.sessions);
 
         return (
             <div>
@@ -53,7 +88,7 @@ export class Home extends Component {
         const response = await fetch('api/sessions/', {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
-        const data = await response.json();
+        const data = await response.json();        
         this.setState({ sessions: data, loading: false });
     }
 }

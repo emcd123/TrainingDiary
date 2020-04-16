@@ -17,7 +17,7 @@ export class AddSession extends Component {
         this.removeFromTable = this.removeFromTable.bind(this);
     }
 
-    state = {
+    state = {             
         excercises: []
     }
 
@@ -33,6 +33,7 @@ export class AddSession extends Component {
         .then(response => {
             console.log(response);
             console.log(response.data);
+            this.props.history.push('/');
         }).catch(error => {
             console.log(error);
         });
@@ -88,7 +89,7 @@ export class AddSession extends Component {
                     ))}
                 </Table>
                 <div clss="row-12" style={{ display: 'flex' }} >
-                    <Button color="success" onClick={this.handleSessionSubmit} >Submit</Button>
+                    <Button color="success" onClick={this.handleSessionSubmit}>Submit</Button>
                     <CancelSubmissionModal buttonLabel="Clear" urlRoute="/" />
                 </div>
             </div>

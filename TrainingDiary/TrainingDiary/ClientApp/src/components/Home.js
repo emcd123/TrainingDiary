@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import authService from './api-authorization/AuthorizeService'
 import './home.css';
 import { Link } from "react-router-dom"; 
@@ -44,24 +45,16 @@ export class Home extends Component {
         );
     }
 
-    removeFromSessionList(value) {
+    async removeFromSessionList(value) {
         let sessions = this.state.sessions;
         var sessionList = sessions.filter(obj => obj.id !== value);
-        sessionList.sort(function (a, b) {
-            var key1 = new Date(a.date);
-            var key2 = new Date(b.date);
-
-            if (key1 < key2) {
-                return -1;
-            } else if (key1 == key2) {
-                return 0;
-            } else {
-                return 1;
-            }
-        });
         this.setState({
             sessions: sessionList
         })
+
+        const token = await authService.getAccessToken();
+        let URL = 'api/Sessions/' + value;
+        axios.delete(URL, { data: {}, headers: { 'Authorization': `Bearer ${token}` } });
     }
 
     render() {
